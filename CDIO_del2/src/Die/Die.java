@@ -3,7 +3,7 @@ package Die;
 import java.util.Random;
 
 
-public abstract class Die implements DieInterface{
+public abstract class Die{
 	private int value;
 	private int sides;
 	

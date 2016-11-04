@@ -10,8 +10,9 @@ public class Account{
 	public int getMoney(){
 		return this.balance;
 	}
-	public void setMoney(int value){
+	public Account setMoney(int value){
 		this.balance = value;
+		return this;
 	}
 	public void addMoney(int value){
 		this.balance += value;

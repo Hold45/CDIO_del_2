@@ -49,7 +49,7 @@ public class Player {
 		return name;
 	}
 	public void takeTurn(){
-		move(game.getCup().roll());
+		move(game.getCup().roll().getSum());
 	}
 	
 }

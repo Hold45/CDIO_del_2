@@ -17,7 +17,7 @@ public abstract class GameSpace{
 	
 	}
 	public void onLand(Player player, String string){
-		DiceGui.addMessage(DiceGui.getString(string));
+		DiceGui.addMessage(DiceGui.getString(string, player));
 	}
 	
 }
