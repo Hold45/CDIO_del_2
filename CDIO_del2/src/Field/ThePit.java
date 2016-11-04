@@ -1,12 +1,12 @@
 package Field;
 
-import GUI.DiceGui;
+import Game.Game;
 import Player.Player;
 
 public class ThePit extends GameSpace {
 
-	public ThePit(){
-		super(DiceGui.getString("THEPITNAME"), DiceGui.getString("THEPITDESC"));
+	public ThePit(Game game){
+		super(game.getString("THEPITNAME"), game.getString("THEPITDESC"), game);
 	}
 
 	public void onLand(Player player){

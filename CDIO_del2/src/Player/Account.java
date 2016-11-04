@@ -14,8 +14,9 @@ public class Account{
 		this.balance = value;
 		return this;
 	}
-	public void addMoney(int value){
+	public Account addMoney(int value){
 		this.balance += value;
+		return this;
 	}
 	public boolean takeMoney(int value){
 		if (value>balance){

@@ -1,4 +1,4 @@
-package Field;
+package GUI;
 
 import desktop_fields.*;
 import java.awt.Color;

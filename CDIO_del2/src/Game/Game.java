@@ -2,10 +2,11 @@ package Game;
 
 import Die.D6;
 import Die.DiceCup;
-import Field.GameSpace;
-import GUI.DiceGui;
+import Field.*;
+import GUI.ImplementsGame;
 import Player.Player;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 public class Game{
@@ -16,9 +17,26 @@ public class Game{
 	private GameSpace[] gameSpaces;
 	private final DiceCup cup = new DiceCup(new D6[]{new D6(), new D6()});
 	private Stack<Player> extraTurns = new Stack<Player>();
+	private ImplementsGame gui;
+	private String message = "";
 	
-	public Game(){
-	
+	public Game(ImplementsGame gui){
+		this.gui = gui;
+		setGameSpaces(
+			new GameSpace[]{
+				new Tower(this),
+				new Crater(this),
+				new PalaceGates(this),
+				new ColdDesert(this),
+				new WalledCity(this),
+				new Monastery(this),
+				new BlackCave(this),
+				new HutsInTheMountain(this),
+				new TheWerewall(this),
+				new ThePit(this),
+				new Goldmine(this)
+			}
+		);
 	}
 	public void addExtraTurn(Player player){
 		this.extraTurns.add(player);
@@ -59,10 +77,18 @@ public class Game{
 	}
 	public void endGame(){
 		if (this.winner!=null){
-			DiceGui.addMessage(DiceGui.getString("WIN", this.winner));
+			this.addMessage(this.gui.getString("WIN", this.winner));
 		}
 		playing = false;
 	}
+
+	public String getString(String key){
+		return this.gui.getString(key);
+	}
+	public String getString(String key, Player player){
+		return this.gui.getString(key).replace("@", player.getName());
+	}
+
 	public boolean checkGameEnd(){
 		if (winner!=null){
 			endGame();
@@ -73,9 +99,24 @@ public class Game{
 	}
 	public void takeTurn(Player player){
 		if (checkGameEnd()){ player.takeTurn();}
-		DiceGui.updateUI();
+		gui.updateUI();
 		while (this.extraTurns.size()>0){
 			takeTurn(this.extraTurns.pop());
 		}
+	}
+
+	public Game addMessage(String message){
+		this.message += message;
+		return this;
+	}
+
+	public String getMessage(){
+		String tempMessage = this.message;
+		this.message = "";
+		return tempMessage;
+	}
+
+	public ImplementsGame getGUI() {
+		return this.gui;
 	}
 }

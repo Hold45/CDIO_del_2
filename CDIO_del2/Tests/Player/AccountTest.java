@@ -32,11 +32,20 @@ public class AccountTest {
 
 	@Test
 	public void testAddMoney() throws Exception {
-
+		assertThat(this.account.addMoney(200).getMoney()).isEqualTo(1200);
 	}
 
 	@Test
 	public void testTakeMoney() throws Exception {
-
+		assertThat(this.account.takeMoney(200)).isTrue();
+		assertThat(this.account.getMoney()).isEqualTo(800);
 	}
+
+	@Test
+	public void testTakeMoneyToManyMoney() throws Exception {
+		assertThat(this.account.takeMoney(1001)).isFalse();
+		assertThat(this.account.getMoney()).isEqualTo(0);
+	}
+
+
 }

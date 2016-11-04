@@ -1,11 +1,11 @@
 package Field;
-import GUI.DiceGui;
+import Game.Game;
 import Player.Player;
 
 public class BlackCave extends GameSpace {
 
-	public BlackCave(){
-		super(DiceGui.getString("BLACKCAVENAME"), DiceGui.getString("BLACKCAVEDESC"));
+	public BlackCave(Game game){
+		super(game.getString("BLACKCAVENAME"), game.getString("BLACKCAVEDESC"), game);
 	}
 
 	public void onLand(Player player){

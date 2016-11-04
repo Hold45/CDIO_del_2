@@ -1,12 +1,12 @@
 package Field;
 
-import GUI.DiceGui;
+import Game.Game;
 import Player.Player;
 
 public class TheWerewall extends GameSpace {
 
-	public TheWerewall(){
-		super(DiceGui.getString("THEWEREWALLNAME"), DiceGui.getString("THEWEREWALLDESC"));
+	public TheWerewall(Game game){
+		super(game.getString("THEWEREWALLNAME"), game.getString("THEWEREWALLDESC"), game);
 	}
 
 	public void onLand(Player player){

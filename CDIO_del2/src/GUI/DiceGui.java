@@ -1,27 +1,29 @@
 package GUI;
 
-import Game.Game;
+import Game.*;
 import Player.Player;
 import desktop_fields.*;
 import desktop_resources.*;
-import java.util.Locale;
-import java.util.ResourceBundle;
+
+import java.util.*;
+
 import desktop_codebehind.Car;
-import Field.*;
 
 import java.awt.Color;
 
-public class DiceGui {
+public class DiceGui implements ImplementsGame{
 
 	public static ResourceBundle labels = ResourceBundle.getBundle("LabelsBundle", Locale.getDefault());
-	private static String message = "";
 	private static Game game;
+	private static List<Field> fields = new ArrayList<>();
 	
 	public static void main(String[] args){
-		DiceGui.game = new Game();
+
+		DiceGui.game = new Game(new DiceGui());
+
 		DiceGui.createBoard(game);
 		Player[] players = {
-			new Player(game, GUI.getUserString(DiceGui.labels.getString("REQUESTNAME1"))), 
+			new Player(game, GUI.getUserString(DiceGui.labels.getString("REQUESTNAME1"))),
 			new Player(game, GUI.getUserString(DiceGui.labels.getString("REQUESTNAME2")))
 		};
 		GUI.addPlayer(
@@ -36,40 +38,32 @@ public class DiceGui {
 		DiceGui.game.setPlayers(players);
 		DiceGui.game.start();
 	}
-	public static String getString(String key){
+
+	public String getString(String key){
 		return DiceGui.labels.getString(key);
 	}
-	public static String getString(String key, Player player){
+
+	public void addField(String title, String description){
+		Field space = new SpaceType.Builder().build();
+		space.setTitle(title);
+		space.setDescription(description);
+		DiceGui.fields.add(space);
+	}
+
+	public String getString(String key, Player player){
 		return DiceGui.labels.getString(key).replace("@", player.getName());
 	}
 	private static void createBoard(Game game){
-		GameSpace[] gameSpaces = {
-			new Tower(),
-			new Crater(),
-			new PalaceGates(),
-			new ColdDesert(),
-			new WalledCity(),
-			new Monastery(),
-			new BlackCave(),
-			new HutsInTheMountain(),
-			new TheWerewall(),
-			new ThePit(),
-			new Goldmine()
-		};
+		int tempSize = 40-DiceGui.fields.size();
+		for (int i = 0; i< tempSize; i++){
+			DiceGui.fields.add(new Empty.Builder().build());
+		}
+
 		Field[] fields = new Field[40];
-		for (int i = 0; i < gameSpaces.length ; i++){
-			fields[i] = gameSpaces[i].space;
-		}
-		for (int i = gameSpaces.length; i<fields.length; i++){
-			fields[i] = new Empty.Builder().build();
-		}
+		fields = DiceGui.fields.toArray(fields);
 		GUI.create(fields);
-		game.setGameSpaces(gameSpaces);
 	}
-	public static void addMessage(String message){
-		DiceGui.message += '\n'+message;
-	}
-	public static void updateUI(){
+	public void updateUI(){
 		int[] r = DiceGui.game.getCup().getValues();
 		GUI.setDice(r[0], r[1]);
 		for (Player player : DiceGui.game.getPlayers()){
@@ -77,7 +71,6 @@ public class DiceGui {
 			GUI.setCar(player.getPosition()+1, player.getName());
 			GUI.setBalance(player.getName(), player.getMoney());
 		}
-		GUI.showMessage(DiceGui.message);
-		DiceGui.message = "";
+		GUI.showMessage(game.getMessage());
 	}
 }

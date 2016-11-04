@@ -1,24 +1,21 @@
 package Field;
 
-
-import GUI.DiceGui;
+import Game.Game;
 import Player.Player;
 
 public abstract class GameSpace{
 
-	public SpaceType space;
-	
-	GameSpace(String title, String description){
-		space = new SpaceType.Builder().build();
-		space.setTitle(title);
-		space.setDescription(description);
+
+	GameSpace(String title, String description, Game game){
+		game.getGUI().addField(title,description);
+
 	}
 	public void onLand(Player player){
 	
 	}
 	public void onLand(Player player, String string){
-		DiceGui.addMessage(DiceGui.getString(string, player));
+		player.getGame().addMessage(player.getGame().getString(string, player));
 	}
-	
+
 }
 

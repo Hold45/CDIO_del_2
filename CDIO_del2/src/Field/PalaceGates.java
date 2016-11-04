@@ -1,12 +1,12 @@
 package Field;
 
-import GUI.DiceGui;
+import Game.Game;
 import Player.Player;
 
 public class PalaceGates extends GameSpace {
 
-	public PalaceGates(){
-		super(DiceGui.getString("PALACEGATESNAME"), DiceGui.getString("PALACEGATESDESC"));
+	public PalaceGates(Game game){
+		super(game.getString("PALACEGATESNAME"), game.getString("PALACEGATESDESC"), game);
 	}
 
 	public void onLand(Player player){

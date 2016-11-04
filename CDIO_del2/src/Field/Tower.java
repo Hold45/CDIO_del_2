@@ -1,12 +1,11 @@
 package Field;
-
-import GUI.DiceGui;
+import Game.Game;
 import Player.Player;
 
 public class Tower extends GameSpace {
 
-	public Tower(){
-		super(DiceGui.getString("TOWERNAME"), DiceGui.getString("TOWERDESC"));
+	public Tower(Game game){
+		super(game.getString("TOWERNAME"), game.getString("TOWERDESC"), game);
 	}
 
 	public void onLand(Player player){

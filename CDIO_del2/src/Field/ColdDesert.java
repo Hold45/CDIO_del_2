@@ -1,12 +1,11 @@
 package Field;
-
-import GUI.DiceGui;
+import Game.Game;
 import Player.Player;
 
 public class ColdDesert extends GameSpace {
 
-	public ColdDesert(){
-		super(DiceGui.getString("COLDDESERTNAME"), DiceGui.getString("COLDDESERTDESC"));
+	public ColdDesert(Game game){
+		super(game.getString("COLDDESERTNAME"), game.getString("COLDDESERTDESC"), game);
 	}
 
 	public void onLand(Player player){

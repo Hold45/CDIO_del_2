@@ -1,12 +1,12 @@
 package Field;
 
-import GUI.DiceGui;
+import Game.Game;
 import Player.Player;
 
 public class Monastery extends GameSpace {
 
-	public Monastery(){
-		super(DiceGui.getString("MONASTERYNAME"), DiceGui.getString("MONASTERYDESC"));
+	public Monastery(Game game){
+		super(game.getString("MONASTERYNAME"), game.getString("MONASTERYDESC"), game);
 	}
 
 	public void onLand(Player player){
