@@ -31,19 +31,22 @@ public class Player {
 	public int getMoney(){
 		return account.getMoney();
 	}
-	public void addMoney(int value){
+	public Player addMoney(int value){
 		this.account.addMoney(value);
 		if (this.account.getMoney()>=3000){
 			this.game.win(this);
 		}
+		return this;
 	}
-	public void takeMoney(int value){
+	public Player takeMoney(int value){
 		if (!account.takeMoney(value)){
 			this.game.lose(this);
 		}
+		return this;
 	}
-	public void setMoney(int value){
+	public Player setMoney(int value){
 		account.setMoney(value);
+		return this;
 	}
 	public String getName(){
 		return name;

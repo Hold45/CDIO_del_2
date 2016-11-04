@@ -5,8 +5,6 @@ import Die.DiceCup;
 import Field.*;
 import GUI.ImplementsGame;
 import Player.Player;
-
-import java.util.Arrays;
 import java.util.Stack;
 
 public class Game{
@@ -55,6 +53,9 @@ public class Game{
 	}
 	public void setPlayers(Player[] players){
 		this.players = players;
+	}
+	public boolean getPlaying(){
+		return this.playing;
 	}
 	public void start(){
 		playing = true;

@@ -37,37 +37,27 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void testGetGame() throws Exception {
-
-	}
-
-	@Test
 	public void testGetMoney() throws Exception {
-
+		assertThat(this.player.getMoney()).isEqualTo(1000);
 	}
 
 	@Test
 	public void testAddMoney() throws Exception {
-
+		assertThat(this.player.addMoney(500).getMoney()).isEqualTo(1500);
 	}
 
 	@Test
 	public void testTakeMoney() throws Exception {
-
+		assertThat(this.player.takeMoney(500).getMoney()).isEqualTo(500);
 	}
 
 	@Test
 	public void testSetMoney() throws Exception {
-
+		assertThat(this.player.setMoney(0).getMoney()).isEqualTo(0);
 	}
 
 	@Test
 	public void testGetName() throws Exception {
-
-	}
-
-	@Test
-	public void testTakeTurn() throws Exception {
-
+		assertThat(this.player.getName()).isEqualTo("Din mor");
 	}
 }
